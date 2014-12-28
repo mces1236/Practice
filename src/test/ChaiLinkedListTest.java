@@ -1,20 +1,16 @@
 package test;
 
 import linkedlist.ChaiLinkedList;
-import basic.ChaiIterator;
 
 public class ChaiLinkedListTest {
 	public static void main(String[] args) {
-		ChaiLinkedList<String> list = new ChaiLinkedList<String>();
+		ChaiLinkedList<Integer> list = new ChaiLinkedList<Integer>();
 
 		for(int i = 0; i < 6; i++){
-			list.add("data"+i);
+			list.add(i);
 		}
-
-		ChaiIterator<String> iterator = list.iterator();
-		for(String data = iterator.next(); data != null; data=iterator.next()){
-			System.out.println(data);
-		}
-		
+		System.out.println(list);
+		System.out.println(list.size());
+		System.out.println(list.nthNodeFromEnd(1));
 	}
 }
