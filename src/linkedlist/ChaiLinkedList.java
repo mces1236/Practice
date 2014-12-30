@@ -6,7 +6,7 @@ import basic.ChaiSingleNode;
 
 public class ChaiLinkedList<T> {
 
-	public ChaiSingleNode<T> head;
+	public ChaiSingleNode<T> head = null;
 
 	public void add(T data){
 		ChaiSingleNode<T> node = new ChaiSingleNode<T>(data);
@@ -88,15 +88,20 @@ public class ChaiLinkedList<T> {
 	}
 
 	public boolean isPalindrome(){
+		if(head == null) return false;
 		ChaiSingleNode<T> middle = getMiddle(), temp = head;
 		middle = reverse(middle);
+		ChaiSingleNode<T> middleTemp = middle;
 
-		for(; (middle != null && temp.data == middle.data); temp = temp.next, middle = middle.next);
+		for(;middleTemp != null; temp = temp.next, middleTemp = middleTemp.next){
+			if(temp.data != middleTemp.data) {
+				reverse(middle);
+				return false;
+			}
+		}
 
-		if(middle == null)
-			return true;
-
-		return false;
+		reverse(middle);
+		return true;
 	}
 
 	public int size() {

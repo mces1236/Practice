@@ -8,4 +8,8 @@ public class ChaiSingleNode<T> {
 		this.data = data;
 		next = null;
 	}
+	
+	public String toString(){
+		return (this.data + "");
+	}
 }
