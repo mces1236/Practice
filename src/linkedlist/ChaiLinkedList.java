@@ -22,7 +22,7 @@ public class ChaiLinkedList<T> {
 			temp.next = node;
 		}
 	}
-
+	
 	public ChaiIterator<T> iterator(){
 		ChaiIterator<T> iterator = new ChaiIterator<T>(head);
 		return iterator;
@@ -116,7 +116,7 @@ public class ChaiLinkedList<T> {
 		StringBuilder sb = new StringBuilder();
 		ChaiIterator<T> iterable = iterator();
 		for(T data = iterable.next(); data != null; data = iterable.next()){
-			sb.append(data);
+			sb.append(data + " ");
 		}
 		return sb.toString();
 	}

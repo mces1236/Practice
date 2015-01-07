@@ -1,6 +1,5 @@
 package test;
 
-import basic.ChaiSingleNode;
 import linkedlist.ChaiLinkedList;
 
 public class ChaiLinkedListTest {
