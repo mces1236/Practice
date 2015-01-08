@@ -26,6 +26,17 @@ public class SortedChaiLinkedList {
 		}
 	}
 	
+	public void removeDuplicatesInaLinkedList(){
+		ChaiSingleNode<Double> temp = sortedLinkedList.head;
+		
+		while(temp.next != null){
+			if(temp.data.equals(temp.next.data))
+				temp.next = temp.next.next;
+			else
+				temp = temp.next; 
+		}
+	}
+	
 	public String toString(){
 		return sortedLinkedList.toString();
 	}
@@ -37,7 +48,9 @@ public class SortedChaiLinkedList {
 			sortedList.add(d);
 		}
 		
-		sortedList.insertInaSortedList(10.0);
+		sortedList.insertInaSortedList(1.0);
+		System.out.println(sortedList);
+		sortedList.removeDuplicatesInaLinkedList();
 		System.out.println(sortedList);
 	}
 }

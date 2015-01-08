@@ -45,6 +45,29 @@ public class ChaiLinkedList<T> {
 
 		return temp.data;
 	}
+	
+	public void pairWiseSwapUsing3Pointers(){
+		
+	}
+	
+	public void pairWiseSwapUsing2Pointers(){
+		ChaiSingleNode<T> current = head;
+		
+		if(current != null && current.next != null){
+			head = current.next;
+			
+			while(current != null && current.next != null){
+				ChaiSingleNode<T> next = current.next;
+				current.next = next.next;
+				next.next = current;
+				next = current.next;
+				
+				if(next != null && next.next != null)
+					current.next = next.next;
+				current = next;
+			}
+		}
+	}
 
 	public void reverse(){
 		ChaiSingleNode<T> cur = head, temp = null, pre = null;
@@ -57,6 +80,32 @@ public class ChaiLinkedList<T> {
 		}
 
 		head = pre;
+	}
+	
+	public void interchangeFirstandLast(){
+		
+		if(head.next != null){
+			ChaiSingleNode<T> temp = head;
+			
+			while(temp.next.next != null){
+				temp = temp.next;
+			}
+			
+			temp.next.next = head;
+			head = temp.next;
+			temp.next = null;
+		}
+	}
+	
+	private void printReverse(ChaiSingleNode<T> temp){
+		if(temp != null){
+			printReverse(temp.next);
+			System.out.println(temp.data);
+		}
+	}
+	
+	public void printReverse(){
+		printReverse(head);
 	}
 
 	public ChaiSingleNode<T> reverse(ChaiSingleNode<T> cur){
@@ -120,7 +169,7 @@ public class ChaiLinkedList<T> {
 		}
 		return sb.toString();
 	}
-
+	
 	public String toString(ChaiSingleNode<T> node){
 		StringBuilder sb = new StringBuilder();
 		for(ChaiSingleNode<T> temp = node; temp != null; temp = temp.next){
