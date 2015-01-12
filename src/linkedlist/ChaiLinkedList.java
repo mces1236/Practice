@@ -6,20 +6,18 @@ import basic.ChaiSingleNode;
 
 public class ChaiLinkedList<T> {
 
-	public ChaiSingleNode<T> head = null;
+	public ChaiSingleNode<T> head = null, tail = null;
 
 	public void add(T data){
 		ChaiSingleNode<T> node = new ChaiSingleNode<T>(data);
 
 		if(head == null){
 			head = node;
+			tail = node;
 		}
 		else{
-			ChaiSingleNode<T> temp = head;
-			while(temp.next != null){
-				temp = temp.next;
-			}
-			temp.next = node;
+			tail.next = node;
+			tail = node;
 		}
 	}
 	
@@ -65,6 +63,29 @@ public class ChaiLinkedList<T> {
 				if(next != null && next.next != null)
 					current.next = next.next;
 				current = next;
+			}
+		}
+	}
+	
+	public void deleteAlternateNodes(){
+		ChaiSingleNode<T> temp = head;
+		
+		while(temp != null && temp.next != null){
+			temp.next = temp.next.next;
+			temp = temp.next;
+		}
+	}
+	
+	public void splitAlternateNodes(ChaiLinkedList<T> list1, ChaiLinkedList<T> list2){
+		ChaiSingleNode<T> temp = head;
+		
+		while(temp != null){
+			list1.add(temp.data);
+			temp = temp.next;
+			
+			if(temp != null){
+				list2.add(temp.data);
+				temp = temp.next;
 			}
 		}
 	}
