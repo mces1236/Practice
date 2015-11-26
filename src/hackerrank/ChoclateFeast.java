@@ -30,6 +30,7 @@ public class ChoclateFeast {
 		}
 		
 		sc.close();
+
 		for(int i = 0; i < nftcs; i++) {
 			System.out.println(ops[i]);
 		}
