@@ -18,15 +18,19 @@ public class ChoclateFeast {
 			int m = sc.nextInt();
 			
 			int cb = n/c;
-			int cfw = cb/m;
 			
-			int wrapLeft = cb % m;
+			int cwl = cb;
 			
-			int chocForLeftWraps = ((wrapLeft + cfw) / m);
+			do {
+				int cfw = cwl/m;
+				cb+=cfw;
+				
+				int wrapLeft = cwl % m;
+
+				cwl = cfw + wrapLeft;
+			}while(cwl >= m);
 			
-			int totalWrapsLeft = (chocForLeftWraps/m);
-			
-			ops[i] = (cb + cfw + chocForLeftWraps + totalWrapsLeft);
+			ops[i] = cb;
 		}
 		
 		sc.close();
