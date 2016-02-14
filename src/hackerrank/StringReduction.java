@@ -14,28 +14,18 @@ public class StringReduction {
 		int[] ops = new int[t];
 		for(int i = 0; i < t; i++){
 			StringBuffer str = new StringBuffer(sc.nextLine());
-
-			int strlen = str.length(), cur = (strlen - 1), toDel = 0, sum = 'a' + 'b' + 'c';
+			StringBuffer temp = new StringBuffer();
 			
-			while(cur > 0) {
-				char curChar = str.charAt(cur);
-				char preChar = str.charAt((cur-1));
-				
-				if (curChar == preChar) {
-					toDel++;
-					cur--;
-				}
-				else {
-					char toInsert = (char)(sum - (curChar + preChar));
-					str.setCharAt((cur-1), toInsert);
-					strlen--;
-					
-					if(toDel > 0) toDel--;
-					else cur--;
+			boolean hasChanged = true;
+			int sum = (int)('a' + 'b' + 'c');
+			
+			while(hasChanged) {
+				for(int j = 0; j < (str.length()-1); j++) {
+					char cur = str.charAt(j);
+					char next = str.charAt(j+1);
 				}
 			}
 			
-			ops[i] = strlen;
 		}
 
 		sc.close();
