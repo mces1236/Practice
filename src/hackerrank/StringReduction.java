@@ -2,8 +2,6 @@ package hackerrank;
 
 import java.util.Scanner;
 
-import com.sun.org.apache.xml.internal.security.keys.storage.StorageResolverException;
-
 public class StringReduction {
 
 	public static void main(String[] args) {
