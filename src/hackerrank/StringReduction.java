@@ -9,33 +9,23 @@ public class StringReduction {
 		Scanner sc = new Scanner(System.in);
 
 		int t = sc.nextInt();
+		sc.nextLine();
 
 		int[] ops = new int[t];
 		for(int i = 0; i < t; i++){
 			StringBuffer str = new StringBuffer(sc.nextLine());
-
-			int strlen = 0;
-			for(int j = 0; i < (str.length()-1); j++) {
-				char fir = str.charAt(j);
-				char sec = str.charAt(j+1);
-				int diff = fir - sec;
-
-				switch(diff) {
-				case 0 : strlen++; break;
-				case 1 : 
-					if((fir == 'a' && sec == 'b') || (fir == 'b' && sec == 'a')) {
-						str.insert((j+1), 'c');
-					}
-					else if((fir == 'b' && sec == 'c') || (fir == 'c' && sec == 'b')) {
-						str.insert((j+1), 'a');
-					}
-					break;
-				case 2 :
-					str.insert((j+1), 'b');
-					break;
+			StringBuffer temp = new StringBuffer();
+			
+			boolean hasChanged = true;
+			int sum = (int)('a' + 'b' + 'c');
+			
+			while(hasChanged) {
+				for(int j = 0; j < (str.length()-1); j++) {
+					char cur = str.charAt(j);
+					char next = str.charAt(j+1);
 				}
 			}
-			ops[i] = strlen+1;
+			
 		}
 
 		sc.close();
