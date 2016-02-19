@@ -39,13 +39,15 @@ public class BinaryTree {
 	public static void main(String[] args) {
 		BinaryTree bt = new BinaryTree(1);
 		
-		for(int i = 2; i < 10; i++)
+		for(int i = 2; i < 20; i++)
 			bt.insert(i);
 		
-		System.out.println(TreeUtils.bfs(bt.root));
-		System.out.println(TreeUtils.inorder(bt.root));
-		System.out.println(TreeUtils.preorder(bt.root));
-		System.out.println(TreeUtils.postorder(bt.root));
+//		System.out.println(TreeUtils.bfs(bt.root));
+//		System.out.println(TreeUtils.inorder(bt.root));
+//		System.out.println(TreeUtils.preorder(bt.root));
+//		System.out.println(TreeUtils.postorder(bt.root));
+//		TreeUtils.bfsLevelWise(bt.root);
+		System.out.println(TreeUtils.inorderWithoutRecursion(bt.root));
 	}
 
 }

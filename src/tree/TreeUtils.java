@@ -2,6 +2,7 @@ package tree;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 
 import binarytree.Node;
 
@@ -19,7 +20,6 @@ public class TreeUtils {
 		while(!queue.isEmpty()) {
 
 			Node current = queue.remove();
-//			System.out.print(current.value + " ");
 			bfsList.add(current);
 
 			if (current.left != null) {
@@ -31,6 +31,36 @@ public class TreeUtils {
 		}
 
 		return bfsList;
+	}
+	
+	public static void bfsLevelWise(Node root) {
+
+		if (root == null) return;
+		
+		int elementsInThisLevel = 0;
+		
+		Queue<Node> queue = new LinkedList<Node>();
+		queue.add(root);
+		elementsInThisLevel++;
+
+		while(!queue.isEmpty()) {
+
+			Node current = queue.remove();
+			System.out.print(current.value + " ");
+			
+			if (current.left != null) {
+				queue.add(current.left);
+			}
+			if (current.right != null) {
+				queue.add(current.right);
+			}
+			
+			elementsInThisLevel--;
+			if (elementsInThisLevel == 0) {
+				System.out.println();
+				elementsInThisLevel = queue.size();
+			}
+		}
 	}
 	
 	public static LinkedList<Node> inorder(Node root) {
@@ -49,6 +79,32 @@ public class TreeUtils {
 			list.add(current);
 			inorderRecursive(current.right, list);
 		}
+	}
+	
+	public static LinkedList<Node> inorderWithoutRecursion(Node node) {
+		LinkedList<Node> list = new LinkedList<Node>();
+		
+		if (node == null) return list;
+		
+		Stack<Node> stack = new Stack<Node>();
+		stack.push(node);
+		
+		while (!stack.isEmpty()) {
+			while (node != null && node.left != null) {
+				stack.push(node.left);
+				node = node.left;
+			}
+			
+			node = stack.pop();
+			list.add(node);
+			
+			if (node != null && node.right != null) {
+				stack.push(node.right);
+				node = node.right;
+			}
+		}
+		
+		return list;
 	}
 	
 	public static LinkedList<Node> preorder(Node root) {
