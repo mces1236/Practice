@@ -1,5 +1,7 @@
 package binarytree;
 
+import java.util.Stack;
+
 public class SingleThreadedBinaryTree {
 
 	public static void main(String[] args) {
@@ -9,15 +11,37 @@ public class SingleThreadedBinaryTree {
 			bt.insert(i);
 		
 		SingleThreadedBinaryTree stbt = new SingleThreadedBinaryTree();
-		stbt.threadedBinaryTree(bt.root, null);
+		stbt.threadedBinaryTree(bt.root);
 		stbt.traverse(bt.root);
 	}
 	
-	public void threadedBinaryTree(Node cur, Node pre) {
+	private void threadedBinaryTree(Node cur) {
+		if (cur == null) return;
+		
+		Node pre = null;
+		Stack<Node> stack = new Stack<Node>();
+		stack.push(cur);
+		
+		while(!stack.isEmpty()) {
+			while(cur.left != null) {
+				stack.push(cur.left);
+				cur = cur.left;
+			}
+			cur = stack.pop();
+			if(pre != null && isLeafNode(pre)) pre.right = cur;
+			pre = cur;
+			if(cur.right != null) {
+				stack.push(cur.right);
+				cur = cur.right;
+			}
+		}
+	}
+
+	public void threadedBinaryTreeRecursive(Node cur, Node pre) {
 		if(cur != null) {
-			threadedBinaryTree(cur.left, cur);
+			threadedBinaryTreeRecursive(cur.left, cur);
 			if(cur.right == null) cur.right = pre;
-			threadedBinaryTree(cur.right, cur);
+			threadedBinaryTreeRecursive(cur.right, cur);
 		}
 	}
 	
@@ -32,6 +56,11 @@ public class SingleThreadedBinaryTree {
 				cur = leftMost(cur.right);
 			}
 		}
+	}
+	
+	private boolean isLeafNode(Node cur) {
+		if(cur.left == null && cur.right == null) return true;
+		return false;
 	}
 
 	private boolean isThreaded(Node cur) {
