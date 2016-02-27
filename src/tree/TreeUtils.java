@@ -142,4 +142,27 @@ public class TreeUtils {
 			list.add(current);
 		}
 	}
+	
+	public static int size(Node cur) {
+		if(cur != null) return (1 + size(cur.left) + size(cur.right));
+		else return 0;
+	}
+	
+	public static int height(Node cur) {
+		if(cur != null) {
+			int lh = height(cur.left);
+			int rh = height(cur.right);
+			
+			if(lh > rh) return (lh + 1);
+			return (rh + 1);
+		}
+		
+		return 0;
+	}
+	
+	public static boolean identicalTrees(Node n1, Node n2) {
+		if(n1 == null && n2 == null) return true;
+		if(n1 == null || n2 == null) return false;
+		return ((n1.value == n2.value) && (identicalTrees(n1.left, n2.left)) && (identicalTrees(n1.right, n2.right)));
+	}
 }
