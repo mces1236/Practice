@@ -1,16 +1,18 @@
 package binarytree;
 
 public class Node {
-	public int value;
+	public Integer value;
 	public Node left, right;
 	
-	public Node(int value) {
+	public Node(Integer value) {
 		this.value = value;
 		left = right = null;
 	}
 	
 	@Override
 	public String toString() {
-		return Integer.toString(value);
+		if(value != null)
+			return Integer.toString(value);
+		return null;
 	}
 }

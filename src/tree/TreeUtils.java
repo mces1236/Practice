@@ -5,6 +5,7 @@ import java.util.Queue;
 import java.util.Stack;
 
 import binarytree.Node;
+import binarytree.NodePointer;
 
 public class TreeUtils {
 
@@ -164,5 +165,27 @@ public class TreeUtils {
 		if(n1 == null && n2 == null) return true;
 		if(n1 == null || n2 == null) return false;
 		return ((n1.value == n2.value) && (identicalTrees(n1.left, n2.left)) && (identicalTrees(n1.right, n2.right)));
+	}
+	
+	public static Boolean inorderPredecessorAndSuccessor(Node cur, NodePointer pre, NodePointer suc, int ele) {
+		if(cur != null) {
+			boolean found = inorderPredecessorAndSuccessor(cur.left, pre, suc, ele);
+			if(found) return found;
+			if (cur.value == ele) {
+				suc.node = getLeftMostNode(cur.right);
+				return true;
+			} else {
+				pre.node = cur;
+			}
+			
+			return inorderPredecessorAndSuccessor(cur.right, pre, suc, ele);
+		}else {
+			return false;
+		}
+	}
+
+	private static Node getLeftMostNode(Node cur) {
+		while(cur != null) cur = cur.left;
+		return cur;
 	}
 }
