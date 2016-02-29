@@ -188,4 +188,71 @@ public class TreeUtils {
 		while(cur != null) cur = cur.left;
 		return cur;
 	}
+	
+	public static Integer inorderPredecesor(Node cur, int ele) {
+		
+		if (cur != null) {
+
+			Node pre = null;
+			Stack<Node> stack = new Stack<Node>();
+			stack.push(cur);
+			
+			while(!stack.isEmpty()) {
+				while(cur.left != null) {
+					stack.push(cur.left);
+					cur = cur.left;
+				}
+				cur = stack.pop();
+				if(cur.value == ele)
+					if (pre != null) return pre.value;
+					else return null;
+				
+				pre = cur;
+				
+				if (cur.right != null) {
+					stack.push(cur.right);
+					cur = cur.right;
+				}
+			}
+		}
+		return null;
+	}
+	
+public static Integer inorderSuccessor(Node cur, int ele) {
+		
+		if (cur != null) {
+
+			Node pre = null;
+			Stack<Node> stack = new Stack<Node>();
+			stack.push(cur);
+			
+			while(!stack.isEmpty()) {
+				while(cur.left != null) {
+					stack.push(cur.left);
+					cur = cur.left;
+				}
+				cur = stack.pop();
+				
+				if(pre != null && pre.value == ele)
+					return cur.value;
+				
+				pre = cur;
+				
+				if (cur.right != null) {
+					stack.push(cur.right);
+					cur = cur.right;
+				}
+			}
+		}
+		return null;
+	}
+	
+	public void inorderPredecessorRecursive(Node cur, NodePointer pre, int ele) {
+		if(cur != null) {
+			inorderPredecessorRecursive(cur.left, pre, ele);
+			if(cur.value == ele) return;
+			else pre.node = cur;
+			inorderPredecessorRecursive(cur.right, pre, ele);
+		}
+	}
 }

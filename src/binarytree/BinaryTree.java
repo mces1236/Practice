@@ -2,7 +2,6 @@ package binarytree;
 
 import java.util.LinkedList;
 import java.util.Queue;
-
 import tree.TreeUtils;
 
 public class BinaryTree {
@@ -46,22 +45,9 @@ public class BinaryTree {
 		
 		for(int i = 2; i < 10; i++)
 			bt1.insert(i);
-		
-//		System.out.println(TreeUtils.bfs(bt.root));
-//		System.out.println(TreeUtils.inorder(bt.root));
-//		System.out.println(TreeUtils.preorder(bt.root));
-//		System.out.println(TreeUtils.postorder(bt.root));
-//		TreeUtils.bfsLevelWise(bt.root);
-//		System.out.println(TreeUtils.inorderWithoutRecursion(bt.root));
-		NodePointer pre = new NodePointer();
-		NodePointer suc = new NodePointer();
-		
-		if(TreeUtils.inorderPredecessorAndSuccessor(bt.root, pre, suc, 5)) {
-			if(pre.node != null)
-				System.out.println("pre" + pre);
-			if(suc.node != null)
-				System.out.println("suc" + suc);
-		}
+	
+		System.out.println(TreeUtils.inorderSuccessor(bt.root, 4));
+
 	}
 
 }
