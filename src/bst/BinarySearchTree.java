@@ -43,11 +43,10 @@ public class BinarySearchTree {
 			Node cur = root, pre = null;
 			
 			Stack<Node> stack = new Stack<Node>();
-			stack.push(cur);
 			
-			while (!stack.isEmpty()) {
-				while (cur.left != null) {
-					stack.push(cur.left);
+			do {
+				while (cur != null) {
+					stack.push(cur);
 					cur = cur.left;
 				}
 				
@@ -57,11 +56,10 @@ public class BinarySearchTree {
 				
 				pre = cur;
 				
-				if (cur.right != null) {
-					stack.push(cur.right);
+				if (cur != null) {
 					cur = cur.right;
 				}
-			}
+			} while (!stack.isEmpty());
 		}
 		
 		return true;
@@ -96,27 +94,78 @@ public class BinarySearchTree {
 		n2.node.value = temp;
 	}
 	
+	public boolean isPairPresent(int target) {
+		Stack<Node> st1 = new Stack<Node>();
+		Stack<Node> st2 = new Stack<Node>();
+		
+		Node cur1 = this.root, cur2 = this.root;
+		int var1 = 0, var2 = 0;
+		boolean done1 = true, done2 = true;
+		
+		while(true) {
+			while(done1) {
+				if(cur1 != null) {
+					st1.push(cur1);
+					cur1 = cur1.left;
+				}
+				else {
+					if(st1.isEmpty()) {
+						done1 = false;
+					}
+					else {
+						cur1 = st1.pop();
+						var1 = cur1.value;
+						cur1 = cur1.right;
+						done1 = false;
+					}
+				}
+			}
+
+			while(done2) {
+				if(cur2 != null) {
+					st2.push(cur2);
+					cur2 = cur2.right;
+				}
+				else {
+					if(st2.isEmpty()) {
+						done2 = false;
+					}
+					else {
+						cur2 = st2.pop();
+						var2 = cur2.value;
+						cur2 = cur2.left;
+						done2 = false;
+					}
+				}
+			}
+			
+			if(var1 != var2 && var1 + var2 == target) {
+				System.out.println("sum of no.s " + var1 + " " + var2 + " = " + target);
+				return true;
+			}
+			else if(var1 + var2 < target) done1 = true;
+			else done2 = true;
+			
+			if(var1 >= var2) return false;
+		}
+	}
+	
 	public static void main(String[] args) {
 		BinarySearchTree bst = new BinarySearchTree();
 		
-		bst.insert(10).right = new Node(8);
-		bst.insert(5).right = new Node(20);
-		bst.insert(2);
-		
-//		bst.insert(8).right = new Node(2);
-//		bst.insert(5);
-//		bst.insert(18);
-//		bst.insert(3);
-//		bst.insert(5);
-//		bst.insert(11);
+		bst.insert(15);
+		bst.insert(10);
+		bst.insert(8);
+		bst.insert(12);
+		bst.insert(20);
+		bst.insert(16);
+		bst.insert(25);
 //		bst.insert(14);
 //		bst.insert(17);
 //		bst.insert(19);
 		
-		System.out.println(bst.isBst());
 		System.out.println(TreeUtils.inorder(bst.root));
-		bst.correctSwappedNodes(bst.root);
-		System.out.println(TreeUtils.inorder(bst.root));
+		System.out.println(bst.isPairPresent(60));
 	}
 
 }
