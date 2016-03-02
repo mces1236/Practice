@@ -1,10 +1,10 @@
 package bst;
 
-import java.util.LinkedList;
 import java.util.Stack;
 
 import tree.TreeUtils;
 import binarytree.Node;
+import binarytree.NodePointer;
 
 public class BinarySearchTree {
 
@@ -17,6 +17,7 @@ public class BinarySearchTree {
 	public Node insert(int ele) {
 		if(root == null) {
 			root = new Node(ele);
+			return root;
 		}
 		else {
 			Node cur = root, par = null;
@@ -34,7 +35,6 @@ public class BinarySearchTree {
 			
 			return insertedNode;
 		}
-		return null;
 	}
 	
 	public boolean isBst() {
@@ -67,24 +67,55 @@ public class BinarySearchTree {
 		return true;
 	}
 	
+	public void correctSwappedNodes(Node cur, NodePointer pre, NodePointer node1, NodePointer node2) {
+		if(cur != null) {
+			correctSwappedNodes(cur.left, pre, node1, node2);
+			
+			if(pre.node != null && pre.node.value > cur.value) {
+				if(node1.node == null) {
+					node1.node = pre.node;
+					node2.node = cur;
+				}
+				else {
+					node2.node = cur;
+				}
+			}
+			pre.node = cur;
+				
+			correctSwappedNodes(cur.right, pre, node1, node2);
+		}
+	}
+	
+	public void correctSwappedNodes(Node cur) {
+		NodePointer n1 = new NodePointer();
+		NodePointer n2 = new NodePointer();
+		NodePointer pre = new NodePointer();
+		correctSwappedNodes(cur, pre, n1, n2);
+		int temp = n1.node.value;
+		n1.node.value = n2.node.value;
+		n2.node.value = temp;
+	}
+	
 	public static void main(String[] args) {
 		BinarySearchTree bst = new BinarySearchTree();
 		
-		bst.insert(10);
-		bst.insert(6);
-		bst.insert(15);
-		bst.insert(4);
-		bst.insert(8).right = new Node(2);
-		bst.insert(13);
-		bst.insert(18);
-		bst.insert(3);
-		bst.insert(5);
-		bst.insert(11);
-		bst.insert(14);
-		bst.insert(17);
-		bst.insert(19);
+		bst.insert(10).right = new Node(8);
+		bst.insert(5).right = new Node(20);
+		bst.insert(2);
+		
+//		bst.insert(8).right = new Node(2);
+//		bst.insert(5);
+//		bst.insert(18);
+//		bst.insert(3);
+//		bst.insert(5);
+//		bst.insert(11);
+//		bst.insert(14);
+//		bst.insert(17);
+//		bst.insert(19);
 		
 		System.out.println(bst.isBst());
+		System.out.println(TreeUtils.inorder(bst.root));
+		bst.correctSwappedNodes(bst.root);
 		System.out.println(TreeUtils.inorder(bst.root));
 	}
 
