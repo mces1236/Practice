@@ -74,6 +74,26 @@ public class TreeUtils {
 		return inorderList;
 	}
 	
+	public static Node createTreetoDllInorder(Node root) {
+		if (root == null) return null;
+		
+		NodePointer headPointer = new NodePointer();
+		
+		createTreetoDllInorder(root, headPointer);
+		
+		return headPointer.node;
+	}
+	
+	private static void createTreetoDllInorder(Node current, NodePointer previous) {
+		if(current != null) {
+			createTreetoDllInorder(current.right, previous);
+			current.right = previous.node;
+			if(previous.node != null) previous.node.left = current;
+			previous.node = current;
+			createTreetoDllInorder(current.left, previous);
+		}
+	}
+	
 	private static void inorderRecursive(Node current, LinkedList<Node> list) {
 		if(current != null) {
 			inorderRecursive(current.left, list);
