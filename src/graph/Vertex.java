@@ -13,6 +13,11 @@ public class Vertex<T> {
 	}
 	
 	@Override
+	public String toString() {
+		return this.data.toString();
+	}
+	
+	@Override
 	public boolean equals(Object obj) {
 		if(obj instanceof Vertex){
 			Vertex<?> second = (Vertex<?>) obj; 
