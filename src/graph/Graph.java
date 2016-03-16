@@ -1,6 +1,7 @@
 package graph;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.LinkedList;
@@ -8,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+
+import utils.Pair;
 
 public class Graph<T> {
 	Map<T, Vertex<T>> vertices;
@@ -168,6 +171,49 @@ public class Graph<T> {
 		}
 	}
 	
+	public boolean unionFindAlgorithmToDetectCycle() {
+		HashMap<T, Pair<T, Integer>> unionFindSet = new HashMap<T, Pair<T, Integer>>();
+		
+		for(Entry<T, Vertex<T>> entry : vertices.entrySet()) {
+			T key = entry.getKey();
+			Pair<T, Integer> pair = new Pair<T, Integer>(key, -1);
+			unionFindSet.put(key, pair);
+		}
+		
+		for(Entry<T, Vertex<T>> entry : vertices.entrySet()) {
+			T key = entry.getKey();
+			
+			T v1Data = key;
+			Pair<T, Integer> v1ParentPair = getParent(v1Data, unionFindSet);
+			
+			for(Edge<T> edge : entry.getValue().edges) {
+				T v2Data = edge.data;
+				Pair<T, Integer> v2ParentPair = getParent(v2Data, unionFindSet);
+				
+				if(v1ParentPair.second < v2ParentPair.second) {
+					v1ParentPair.second += v2ParentPair.second;
+				} else {
+					
+				}
+			}
+		}
+		
+		return false;
+	}
+	
+	private Pair<T, Integer> getParent(T v1Data, HashMap<T, Pair<T, Integer>> unionFindSet) {
+		
+		Pair<T, Integer> pair = unionFindSet.get(v1Data);
+		T parent = pair.first;
+
+		while(pair.second < -1) {
+			pair = unionFindSet.get(parent);
+			parent = pair.first;
+		}
+		
+		return pair;
+	}
+
 	public boolean detectCycleInDirectedGraph() {
 		if(root == null) return false;
 		
