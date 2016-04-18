@@ -4,8 +4,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Vertex<T> {
-	T data;
-	List<Edge<T>> edges;
+	public T data;
+	public List<Edge<T>> edges;
 	
 	public Vertex(T value) {
 		data = value;
