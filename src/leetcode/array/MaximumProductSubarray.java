@@ -25,7 +25,7 @@ public class MaximumProductSubarray {
             if(nProduct > max) max = nProduct;
         }
 
-        return max;
+//        return max;
         System.out.println(max);
     }
 }
